@@ -1,0 +1,20 @@
+openapi: 3.0.3
+info:
+  title: API Ping
+  description: A simple OpenAPI which return pong for ping request
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+
+paths:
+  /ping:
+    get:
+      summary: check the server
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: pong
