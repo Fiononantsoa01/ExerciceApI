@@ -1,0 +1,47 @@
+openapi: 3.0.3
+info:
+  title: Users API
+  version: "1.0.0"
+paths:
+  /users:
+    get:
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+          required: false
+        - in: query
+          name: size
+          schema:
+            type: integer
+          required: false
+      responses:
+        200:
+          description: user find
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: Fiononantsoa
+                    email:
+                      type: string
+                      example: fiononanantsoa@mail.com
+        400:
+          description: bad request for the parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Bad types for provided query parameters
