@@ -1,0 +1,71 @@
+openapi: 3.0.3
+info:
+  title: Product API
+  version: "1.0.0"
+paths:
+  /products:
+    get:
+      summary: find product
+      parameters:
+        - $ref: '#/components/parameters/LimitParameters'
+        - $ref: '#/components/parameters/Qparameters'
+      responses:
+        200:
+          description: list of product find
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+              examples:
+                multipleProducts:
+                  summary: find more product
+                  value:
+                    - name: "Milk"
+                      expiration_datetime: "2025-12-24T21:56:59Z"
+                      price: 2.50
+                    - name: "Beer"
+                      expiration_datetime: "2025-12-14T14:55:22Z"
+                      price: 22.36
+                Emptyresult:
+                  summary: no product find
+                  value: []
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        name:
+          type: string
+          example: milk
+        expiration_datetime:
+          type: string
+          format: date-time
+          example: "2025-09-25T14:30:00Z"
+        price:
+          type: number
+          format: float
+          example: 3.99
+      required:
+        - name
+        - expiration_datetime
+        - price
+  parameters:
+    LimitParameters:
+      in: query
+      name: limit
+      description: maximum of elements to return
+      required: false
+      schema:
+        type: integer
+        example: 10
+    Qparameters:
+      in: query
+      name: q
+      description: term to find
+      required: false
+      schema:
+        type: string
+        example: chocolate
